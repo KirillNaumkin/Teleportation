@@ -1,0 +1,75 @@
+=========================Personal Teleporter changelog=========================
+0.2.0:
+• mod has been entirely rewritten;
+• fully configurable (see config);
+• fully localizable: gui, tooltips, messages and game objects (see locale);
+• all messages became more informative;
+• added new item: Jump Targeter, used for targeting position you want to jump to; uses Personal Teleporter's energy to work;
+• added gui-buttons for GPS-sorting existing beacons: as is in (G)lobal list, by distance from the (P)layer, by distance from the (S)tarting zone;
+• now gui works supagood!))) it's always updated for all players of all forces;
+• added support for multy-force games: each force owns it's beacons and can't use another force's ones. Or can - configurable;
+• lots of tooltips added - also localizable;
+• mod's main button restyled: has graphics of Personal Teleporter equipment;
+• Personal Teleporter equipment is now 2x2 (not 3x3) in your armour; and it also charges slower (33% decreased charge rate); but you can use several ones; but it's very expensive; balanced ))))
+• changed recipes, removed alien liquid and teleporter core (Occam's Razor principle: do not multiply unneeded entities)
+• Teleporter Beacons now stackable by 5;
+• realized migration 0.1.6 -> 0.2.0: beacons and items will be replaced, gui - updated, global list - rewritten, another vars - nil'ed.
+
+0.2.1:
+• now Jump Targeter spends energy per distance;
+• Personal Teleporter equipment is battery-like, not shield-like: disappeared infinite progressbar of shield capacity;
+• several messages became much more informative;
+• no more local variables in the control.lua top! no more desyncs! should work well in multiplayer (feedback needed);
+• gui settings are being saved per player now;
+• technology is splitted into two: the first is mid-game Teleporter Beacons and the second is late-game Personal Teleporter equipment and Jump Targeter. Big thanks to credomane for his great idea! now you can teleport to Beacons when you stay on another Beacon, if both have enough energy; if so - Personal Teleporter equipment will be ignored.
+
+0.2.2:
+• fixed crash on paging list of Beacons;
+• fixed technology names "UnknownKey"-bug;
+• fixed too long cooldown between straight jumps;
+• optimized performance by replacing on_tick event handler with simplier and less frequent logic (oh, that useless tick-counting...);
+• added more informativeness to items descriptions;
+• added "Y"-hotkey for quick toggling visibility of Teleporter Beacons list; configurable (see game menu -> settings -> controls -> mods) and localizable (see locale);
+• added some details in config file.
+
+0.2.3:
+• fixed that hotkey could open beacons list even if there were no beacons;
+• fixed crash that new players tried to use straight jumping;
+• fixed that there were no feedback from Jump Targeter if player was not equipped with Personal Teleporter;
+• removed Beacon name from rename dialog header.
+
+0.2.4:
+• fixed crash on beacon built by robot.
+
+0.2.5:
+• cosmetic improvements for GUI;
+
+0.2.6:
+• cleanup locale files;
+• fixed: 0.1.5 -> 0.2.6 migration realized; now this version supports migrating from 0.1.5-0.2.5 to 0.2.6;
+• added: spitters and worms projectiles don't persecute player after teleporting.
+
+0.2.7:
+• fixed possibility to teleport to the beacon the player is standing on;
+• added compatibility with 0.14 Factorio version.
+
+0.2.8:
+• fixed that game crashes when player tries to teleport while sitting in vehicle (either using a portal or activating a beacon); now player surely cannot teleport while sitting in vehicle;
+
+=========================Teleportation changelog=========================
+0.14.0:
+• forked to Teleportation.
+
+0.14.1:
+• tooltips cleanup;
+• added russian locale;
+• added hotkey "CTRL + Y" for teleporting to the closest beacon having enough energy.
+
+0.14.2:
+• balanced energy consumption of Personal Teleporter equipment;
+• fixed the mismatch of file name and path to it in prototypes.
+
+0.14.3:
+• balanced power characteristics of all mod's objects;
+• fixed incompatibility with Factorio 0.12.35 and later;
+• changed precision of jump targeting. Now if there's something colliding exact at the point you've targeted, you'll be moved to a non-colliding point that is the nearest to the targeted. If the nearest non-colliding point is further than 2 tiles, failure message will be wtitten.

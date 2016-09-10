@@ -1,0 +1,10 @@
+01 orange
+02 red
+03 lime
+04 green
+05 mint
+06 pink
+07 purple
+08 cyan
+09 light-blue
+10 dark-blue
