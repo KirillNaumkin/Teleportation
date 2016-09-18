@@ -4,7 +4,8 @@ require "util"
   global
     Teleportation = {}; dictionary
       beacons = {}; list
-        entity = entity; contains such fields as built_by, position, surface, force - needed to teleport and to operate with players gui
+        entity = entity; contains such fields as built_by (last_user since 0.14.6), position, surface, force - needed to teleport and to operate with players gui
+        marker = entity; contains not-on-map-train-stop to show beacons name on map;
         key = entity.surface.name .. "-" .. entity.position.x .. "-" .. entity.position.y; it's an id for gui elements representing this beacon
         name = "x:" .. entity.position.x .. ",y:" .. entity.position.y .. ",s:" .. entity.surface.name; it's default name to show in gui element
       player_settings = {}; dictionary, e.g. global.Teleportation.player_settings[player_name].used_portal_on_tick
@@ -41,7 +42,12 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
     RememberTeleporterBeacon(event.created_entity)
   elseif event.created_entity.name == "teleportation-portal" then
     local destination = event.created_entity.position
-    local player = event.created_entity.built_by
+    local player
+    if game.active_mods["base"] < "0.14.6" then
+      player = event.created_entity.built_by -- pre-0.14.6 compatibility
+    else
+      player = event.created_entity.last_user
+    end
     event.created_entity.destroy()
     ActivatePortal(player, destination)
     player.insert({name = "teleportation-portal", count = 1})
@@ -173,6 +179,9 @@ function RememberTeleporterBeacon(entity)
   beacon.key = CreateBeaconKey(entity)
   beacon.name = CreateBeaconName(entity)
   beacon.entity = entity
+  local marker = entity.surface.create_entity({name = "teleportation-beacon-marker", position = entity.position, force = game.forces.neutral})
+  marker.backer_name = beacon.name
+  beacon.marker = marker
   table.insert(global.Teleportation.beacons, beacon)
   UpdateGui(beacon.entity.force)
 end
@@ -183,6 +192,9 @@ function ForgetTeleporterBeacon(entity)
   for i = #global.Teleportation.beacons, 1, -1 do
     local beacon = global.Teleportation.beacons[i]
     if beacon.key == key_to_forget then
+      if global.Teleportation.beacons[i].marker and global.Teleportation.beacons[i].marker.valid then
+        global.Teleportation.beacons[i].marker.destroy()
+      end
       table.remove(global.Teleportation.beacons, i)
       UpdateGui(entity.force)
       return
@@ -775,5 +787,21 @@ function SaveNewBeaconsName(player, beacon_key)
     new_name = CreateBeaconName(beacon.entity)
   end
   beacon.name = new_name
+  beacon.marker.backer_name = new_name
   gui.teleportation_rename_window.destroy()
 end
+
+--===================================================================--
+--############################ MIGRATIONS ###########################--
+--===================================================================--
+script.on_configuration_changed(function() 
+  if global.Teleportation and global.Teleportation.beacons and #global.Teleportation.beacons > 0 then
+    for i, beacon in pairs(global.Teleportation.beacons) do
+      if not beacon.marker then
+        local marker = beacon.entity.surface.create_entity({name = "teleportation-beacon-marker", position = beacon.entity.position, force = game.forces.neutral})
+        marker.backer_name = beacon.name
+        beacon.marker = marker
+      end
+    end
+  end
+end)

@@ -73,3 +73,9 @@
 • balanced power characteristics of all mod's objects;
 • fixed incompatibility with Factorio 0.12.35 and later;
 • changed precision of jump targeting. Now if there's something colliding exact at the point you've targeted, you'll be moved to a non-colliding point that is the nearest to the targeted. If the nearest non-colliding point is further than 2 tiles, failure message will be wtitten.
+
+0.14.4:
+• compatibility with Factorio 0.14.6.
+
+0.14.5:
+• beacons are shown on the map, like train-stations.

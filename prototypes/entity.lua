@@ -49,7 +49,7 @@ portal_targeter.attack_parameters =
 	cooldown = 30,
 	projectile_center = {0, 0},
 	projectile_creation_distance = 1.4,
-	range = 0,
+	range = 2,
 	damage_modifier = 0,
 	ammo_type =
 	{
@@ -140,5 +140,37 @@ data:extend({
     },
     discharge_cooldown = 60,
     discharge_light = {intensity = 0.7, size = 7},
-  }
+  },
+  {
+		type = "train-stop",
+		name = "teleportation-beacon-marker",
+		icon = "__Teleportation__/graphics/null.png",
+		flags = {"placeable-off-grid", "placeable-neutral", "player-creation", "filter-directions"},
+		order = "y",
+		selectable_in_game = false,
+		minable = {mining_time = 1, result = "train-stop"},
+		max_health = 0,
+		render_layer = "tile",
+		final_render_layer = "tile",
+		collision_box = {{0,0}, {0,0}},
+		selection_box = {{0,0}, {0,0}},
+		drawing_box = {{0,0}, {0,0}},
+		tile_width = 1,
+		tile_height = 1,
+		animation_ticks_per_frame = 0,
+	
+		vehicle_impact_sound =	{ filename = "__base__/sound/car-metal-impact.ogg", volume = 0 },
+		working_sound =
+		{
+			sound = { filename = "__base__/sound/train-stop.ogg", volume = 0 }
+		},
+		circuit_wire_connection_points = {},
+		circuit_connector_sprites =
+		{
+			get_circuit_connector_sprites({0.5625-1, 1.03125}, {0.5625-1, 1.03125}, 0), --N
+			get_circuit_connector_sprites({-0.78125, 0.28125-1}, {-0.78125, 0.28125-1}, 6), --E
+			get_circuit_connector_sprites({-0.28125+1, 0.28125}, {-0.28125+1, 0.28125}, 0), --S
+			get_circuit_connector_sprites({0.03125, 0.28125+1}, {0.03125, 0.28125+1}, 6), --W
+		},
+	}
 })
