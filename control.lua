@@ -10,7 +10,7 @@ require "util"
         name = "x:" .. entity.position.x .. ",y:" .. entity.position.y .. ",s:" .. entity.surface.name; it's default name to show in gui element
       player_settings = {}; dictionary, e.g. global.Teleportation.player_settings[player_name].used_portal_on_tick
         used_portal_on_tick; number
-        beacons_list_is_sorted_by; number: 1 is global list as is (default), 2 is sorting by distance from start, 3 is sorting by distance from player
+        beacons_list_is_sorted_by; number: 1 is global list as is (default), 2 is sorting by distance from start, 3 is sorting by distance from player, 4 is sorting by alphabet
         beacons_list_current_page_num; number, default is 1
   Teleportation = {}; dictionary
     config = {}; dictionary
@@ -43,10 +43,10 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
   elseif event.created_entity.name == "teleportation-portal" then
     local destination = event.created_entity.position
     local player
-    if game.active_mods["base"] < "0.14.6" then
-      player = event.created_entity.built_by -- pre-0.14.6 compatibility
-    else
+    if game.active_mods["base"]:IsGreaterOrEqual("0.14.6") then
       player = event.created_entity.last_user
+    else
+      player = event.created_entity.built_by -- pre-0.14.6 compatibility
     end
     event.created_entity.destroy()
     ActivatePortal(player, destination)
@@ -78,6 +78,7 @@ end)
 
 script.on_event(defines.events.on_put_item, function(event)
 	local player = game.players[event.player_index]
+  --player.print("Putting item " .. game.tick)
   local destination = event.position
   ActivatePortal(player, destination)
 end)
@@ -116,13 +117,17 @@ script.on_event(defines.events.on_gui_click, function(event)
     InitializePlayerGlobals(player)
     global.Teleportation.player_settings[player.name].beacons_list_is_sorted_by = 1
     UpdateMainWindow(player)
-  elseif gui_element.name == "teleportation_button_sort_distance_from_start" then  -- S -button, no sorting
+  elseif gui_element.name == "teleportation_button_sort_distance_from_player" then -- P -button, by distance from player
+    InitializePlayerGlobals(player)
+    global.Teleportation.player_settings[player.name].beacons_list_is_sorted_by = 3
+    UpdateMainWindow(player)
+  elseif gui_element.name == "teleportation_button_sort_distance_from_start" then  -- S -button, by distance from start
     InitializePlayerGlobals(player)
     global.Teleportation.player_settings[player.name].beacons_list_is_sorted_by = 2
     UpdateMainWindow(player)
-  elseif gui_element.name == "teleportation_button_sort_distance_from_player" then -- P -button, no sorting
+  elseif gui_element.name == "teleportation_button_sort_alphabet" then  -- A -button, by alphabet
     InitializePlayerGlobals(player)
-    global.Teleportation.player_settings[player.name].beacons_list_is_sorted_by = 3
+    global.Teleportation.player_settings[player.name].beacons_list_is_sorted_by = 4
     UpdateMainWindow(player)
   elseif gui_element.name == "teleportation_button_activate" then         -- T -button (teleport)
     ActivateBeacon(player, gui_element.parent.name)
@@ -341,6 +346,12 @@ function GetBeaconsSorted(list, force_name, sort_order, player)
       end
     end
     sorted_beacons = sorted_beacons_on_current_surface
+  elseif sort_order == 4 then --sort by alphabet
+    local beacons = list
+    table.sort(beacons, function(a,b)
+      return a.name < b.name
+    end)
+    sorted_beacons = beacons
   end
   return sorted_beacons
 end
@@ -528,20 +539,23 @@ end
 
 function GetPlayerEquipment(player)
   if player ~= nil and player.valid and player.connected then
-    local equipment = player.get_inventory(defines.inventory.player_armor)[1].grid.equipment
-    local has_equipment = false
-    local most_charged_personal_teleporter = false
-    for i, item in pairs(equipment) do
-      if item.name == "teleportation-equipment" then
-        if not most_charged_personal_teleporter then
-          most_charged_personal_teleporter = item
-        end
-        if most_charged_personal_teleporter.energy < item.energy then
-          most_charged_personal_teleporter = item
+    local armor_as_item_stack = player.get_inventory(defines.inventory.player_armor)[1]
+    if armor_as_item_stack and armor_as_item_stack.valid and armor_as_item_stack.valid_for_read and armor_as_item_stack.grid and armor_as_item_stack.grid.valid then
+      local equipment = armor_as_item_stack.grid.equipment
+      local has_equipment = false
+      local most_charged_personal_teleporter = false
+      for i, item in pairs(equipment) do
+        if item.name == "teleportation-equipment" then
+          if not most_charged_personal_teleporter then
+            most_charged_personal_teleporter = item
+          end
+          if most_charged_personal_teleporter.energy < item.energy then
+            most_charged_personal_teleporter = item
+          end
         end
       end
+      return most_charged_personal_teleporter
     end
-    return most_charged_personal_teleporter
   end
   return false
 end
@@ -572,11 +586,33 @@ function IsHolding(stack, player) -- thanks to supercheese (Orbital Ion Cannon a
 end
 
 function Teleport(player, surface_name, destination_position)
+  surface_name = surface_name or "nauvis"
   player.teleport({destination_position.x-0.3, destination_position.y + 0.1}, surface_name)
 end
 
 function GetDistanceBetween(position1, position2)
   return math.sqrt(math.pow(position2.x - position1.x, 2) + math.pow(position2.y - position1.y, 2))
+end
+
+function string:Split(separator)
+  local separator = separator or "."
+  local fields = {}
+  local pattern = string.format("([^%s]+)", separator)
+  self:gsub(pattern, function(c) fields[#fields+1] = c end)
+  return fields
+end
+
+function string:IsGreaterOrEqual(version_to_compare)
+  local cur_ver = self:Split(".")
+  local another_ver = version_to_compare:Split(".")
+  for k,v in pairs(cur_ver) do
+    local cur_ver_val = tonumber(v) or 0
+    local another_ver_val = tonumber(another_ver[k]) or 0
+    if cur_ver_val < another_ver_val then
+      return false
+    end
+  end
+  return true
 end
 
 function BlockProjectiles(player)
@@ -655,6 +691,8 @@ function ShowMainWindow(player)
       button.tooltip = {"tooltip-button-sort-distance-from-player"}
       button = buttonFlow.add({type="button", name="teleportation_button_sort_distance_from_start", caption="S", style="teleportation_button_style"})
       button.tooltip = {"tooltip-button-sort-distance-from-start"}
+      button = buttonFlow.add({type="button", name="teleportation_button_sort_alphabet", caption="A", style="teleportation_button_style"})
+      button.tooltip = {"tooltip-button-sort-alphabet"}
       UpdateMainWindow(player)
     end
   end
@@ -724,19 +762,8 @@ function AddRow(container, beacon, index, sort_type)
   buttonFlow.add({type="button", name="teleportation_button_activate", caption="T", style="teleportation_button_style"})
   buttonFlow.add({type="button", name="teleportation_button_rename", caption="N", style="teleportation_button_style"})
   if sort_type == 1 then
-    local suffix
-    if index > 1 then
-      suffix = " "
-    else
-      suffix = "|"
-    end
-    buttonFlow.add({type="button", name="teleportation_button_order_up", caption=suffix .. "<", style="teleportation_button_style"})
-    if index < CountBeacons(beacon.entity.force.name) then
-      suffix = " "
-    else
-      suffix = "|"
-    end
-    buttonFlow.add({type="button", name="teleportation_button_order_down", caption=">" .. suffix, style="teleportation_button_style"})
+    buttonFlow.add({type="button", name="teleportation_button_order_up", caption="<", style="teleportation_button_style"})
+    buttonFlow.add({type="button", name="teleportation_button_order_down", caption=">", style="teleportation_button_style"})
   end
   frame = container.add({type="frame", name=beacon.key, direction="horizontal", style="teleportation_thin_frame"})
   local label = frame.add({type="label", name="teleportation_label_beacons_name", caption=beacon.name, style="teleportation_label_style"})

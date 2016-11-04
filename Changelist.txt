@@ -79,3 +79,12 @@
 
 0.14.5:
 • beacons are shown on the map, like train-stations.
+
+0.14.6:
+• beacons are now sortable by alphabet.
+
+0.14.7:
+• fixed crash when trying to teleport without armour with equipment grid (thanks to TheSAguy for his bugreport).
+
+0.14.8:
+• fixed bug that would cause crashes in >= 0.14.10 Factorio versions.

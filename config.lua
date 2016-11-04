@@ -1,6 +1,6 @@
 --[[Defines how many teleporter beacons should be on page. NOT ZERO VALUE!
     Default is 10. ]]
-Teleportation.config.page_size = 10
+Teleportation.config.page_size = 20
 
 --[[Defines what should be shown in pager.
     • "true" for pages (e.g. "2/4");

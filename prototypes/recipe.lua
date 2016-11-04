@@ -22,7 +22,7 @@ data:extend({
 			{"teleportation-beacon", 1},
 			{"rocket-control-unit", 100},
 			{"low-density-structure",50},
-			{"fusion-reactor-equipment", 100}
+			{"fusion-reactor-equipment", 30}
 		},
 		result = "teleportation-equipment",
 	},
@@ -30,7 +30,7 @@ data:extend({
     type = "recipe",
     name = "teleportation-portal",
     ingredients = {
-      {"fusion-reactor-equipment", 20},
+      {"fusion-reactor-equipment", 1},
       {"alien-artifact", 100}
     },
     result = "teleportation-portal",
