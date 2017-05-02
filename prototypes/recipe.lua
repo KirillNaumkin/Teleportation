@@ -2,39 +2,38 @@ data:extend({
 	{
 		type = "recipe",
 		name = "teleportation-beacon",
-		ingredients =
-		{
+		enabled = false,
+		ingredients =	{
 			{"steel-plate", 100},
 			{"copper-plate", 100},
 			{"advanced-circuit", 100},
-			{"alien-artifact",20}
+			{"accumulator", 100}
 		},
 		result = "teleportation-beacon",
-		enabled = "false"	
+		energy_required = 5
 	},
 	{
 		type = "recipe",
 		name = "teleportation-equipment",
-		enabled = "false",
+		enabled = false,
 		energy_required = 10,
-		ingredients = 
-		{
+		ingredients =	{
 			{"teleportation-beacon", 1},
-			{"rocket-control-unit", 100},
-			{"low-density-structure",50},
-			{"fusion-reactor-equipment", 30}
+			{"speed-module", 100},
+			{"plastic-bar", 100},
+			{"copper-cable", 50},
+			{"fusion-reactor-equipment", 15}
 		},
 		result = "teleportation-equipment",
 	},
-  {
-    type = "recipe",
-    name = "teleportation-portal",
-    ingredients = {
-      {"fusion-reactor-equipment", 1},
-      {"alien-artifact", 100}
-    },
-    result = "teleportation-portal",
-    energy_required = 30,
-    enabled = false
-  }
+	{
+		type = "recipe",
+		name = "teleportation-portal",
+		enabled = false,
+		ingredients = {
+			{"processing-unit", 10}
+		},
+		result = "teleportation-portal",
+		energy_required = 30
+	},
 })

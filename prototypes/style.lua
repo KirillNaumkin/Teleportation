@@ -98,11 +98,3 @@ data.raw["gui-style"].default["teleportation_textbox"] = {
     minimal_width = 300,
     maximal_width = 300,
 }
-
-data.raw["gui-style"].default["teleportation_placeholder"] = {
-  type = "button_style",
-  parent = "button_style",
-  width = 33,
-  height = 33,
-}
-

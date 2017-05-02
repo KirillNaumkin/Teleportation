@@ -4,7 +4,7 @@ portal_targeter.name = "teleportation-portal"
 portal_targeter.icon = "__Teleportation__/graphics/portal-32.png"
 portal_targeter.flags = {"placeable-neutral", "player-creation","placeable-off-grid"}
 portal_targeter.collision_mask = {}
-portal_targeter.max_health = 0
+portal_targeter.max_health = 1
 portal_targeter.inventory_size = 0
 portal_targeter.collision_box = {{ 0, 0}, {0, 0}}
 portal_targeter.selection_box = {{ 0, 0}, {0, 0}}
@@ -85,18 +85,70 @@ data:extend({
   }
 })
 
+--require ("prototypes.entity.demo-circuit-connector-sprites")
 data:extend({
-  {
-    type = "accumulator",
-    name = "teleportation-beacon",
-    icon = "__Teleportation__/graphics/icon.png",
-    flags = {"placeable-neutral", "player-creation"},
-    minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-beacon"},
-    max_health = 150,
-    corpse = "medium-remnants",
+	{
+		type = "container",
+		name = "teleportation-beacon",
+		icon = "__Teleportation__/graphics/icon.png",
+		flags = {"placeable-neutral", "placeable-player", "player-creation"},
+		minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-beacon"},
+		max_health = 150,
+		corpse = "medium-remnants",
+		dying_explosion = "medium-explosion",
+		open_sound = { filename = "__base__/sound/machine-open.ogg", volume = 0.85 },
+		close_sound = { filename = "__base__/sound/machine-close.ogg", volume = 0.75 },
+		vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
+		resistances =
+		{
+			{
+				type = "fire",
+				percent = 90
+			}
+		},
     collision_box = {{-2, -2}, {2,2}},
     collision_mask = {"water-tile", "item-layer", "object-layer"},
     selection_box = {{-2, -2}, {2, 2}},
+    render_layer = decorative,
+		inventory_size = 10,
+    picture =
+    {
+      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
+      priority = "high",
+      width = 128,
+      height = 128,
+      shift = {0, 0}
+    }
+    --[[circuit_wire_connection_point =
+    {
+      shadow =
+      {
+        red = {0.734375, 0.453125},
+        green = {0.609375, 0.515625},
+      },
+      wire =
+      {
+        red = {0.40625, 0.21875},
+        green = {0.40625, 0.375},
+      }
+    },
+    circuit_connector_sprites = get_circuit_connector_sprites({0.1875, 0.15625}, nil, 18),
+    circuit_wire_max_distance = 7.5]]
+	},
+  {
+    type = "electric-energy-interface",
+    name = "teleportation-beacon-electric-energy-interface",
+    localised_name = {"entity-name.teleportation-beacon"},
+    icon = "__Teleportation__/graphics/icon.png",
+    flags = {"placeable-neutral", "player-creation"},
+    minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-beacon-electric-energy-interface"},
+    destructible = false,
+    selectable_in_game = false,
+    max_health = 1,
+    corpse = "medium-remnants",
+    collision_box = {{-2, -2}, {2,2}},
+    collision_mask = {"water-tile", "item-layer", "object-layer"},
+    selection_box = {{0, 0}, {0, 0}},
     render_layer = decorative,
     energy_source =
     {
@@ -108,35 +160,35 @@ data:extend({
     },
     picture =
     {
-      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
+      filename = "__Teleportation__/graphics/null.png",
       priority = "extra-high",
-      width = 128,
-      height = 128,
-	  line_length = 16,
-	  frame_count = 16,
+      width = 0,
+      height = 0,
+      line_length = 0,
+      frame_count = 0,
       shift = {0, 0}
     },
     charge_animation =
     {
-      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
-      width = 128,
-      height = 128,
-      line_length = 16,
-      frame_count = 16,
+      filename = "__Teleportation__/graphics/null.png",
+      width = 0,
+      height = 0,
+      line_length = 0,
+      frame_count = 0,
       shift = {0, 0},
-      animation_speed = 0.5
+      animation_speed = 0
     },
     charge_cooldown = 30,
     charge_light = {intensity = 0.3, size = 7},
     discharge_animation =
     {
-      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
-      width = 128,
-      height = 128,
-      line_length = 16,
-      frame_count = 16,
+      filename = "__Teleportation__/graphics/null.png",
+      width = 0,
+      height = 0,
+      line_length = 0,
+      frame_count = 0,
       shift = {0, 0},
-      animation_speed = 0.5
+      animation_speed = 0
     },
     discharge_cooldown = 60,
     discharge_light = {intensity = 0.7, size = 7},
@@ -144,12 +196,14 @@ data:extend({
   {
 		type = "train-stop",
 		name = "teleportation-beacon-marker",
+    localised_name = {"entity-name.teleportation-beacon"},
 		icon = "__Teleportation__/graphics/null.png",
 		flags = {"placeable-off-grid", "placeable-neutral", "player-creation", "filter-directions"},
+    friendly_map_color = {r=1, g=1, b=0},
 		order = "y",
 		selectable_in_game = false,
 		minable = {mining_time = 1, result = "train-stop"},
-		max_health = 0,
+		max_health = 1,
 		render_layer = "tile",
 		final_render_layer = "tile",
 		collision_box = {{0,0}, {0,0}},
@@ -174,3 +228,69 @@ data:extend({
 		},
 	}
 })
+
+--[[
+local telesender = util.table.deepcopy(data.raw["inserter"]["fast-inserter"])
+telesender.name = "Test"
+telesender.energy_source =
+{
+	type = "electric",
+	usage_priority = "secondary-input",
+	drain = "0.8kW"
+}
+telesender.name = "teleportation-telesender"
+telesender.icon = "__Teleportation__/graphics/telesender-icon.png"
+telesender.hand_base_picture =
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.hand_closed_picture = 
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.hand_open_picture =
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.hand_base_shadow =
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.hand_closed_shadow =
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.hand_open_shadow =
+{
+	filename = "__Teleportation__/graphics/null.png",
+	width = 0,
+	height = 0
+}
+telesender.platform_picture =
+{
+	sheet=
+	{
+		filename = "__Teleportation__/graphics/telesender-platform.png",
+		priority = "extra-high",
+		width = "46",
+		height = "46"
+	}
+}
+
+telesender.energy_per_movement = 4500
+telesender.energy_per_rotation = 4500
+telesender.rotation_speed = 1
+telesender.extension_speed = 1
+telesender.minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-telesender"}
+data:extend({telesender})
+]]
