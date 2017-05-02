@@ -88,3 +88,12 @@
 
 0.14.8:
 • fixed bug that would cause crashes in >= 0.14.10 Factorio versions.
+
+0.14.9:
+• GUI changes: power indicators in the beacons list and in the popup (hover mouse over the beacon to see);
+• now beacons can be charged from accumulators;
+• reduced equipment cost.
+
+0.15.0:
+• updated for Factorio 0.15.x;
+• reduced equipment cost.
