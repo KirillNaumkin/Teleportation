@@ -45,14 +45,18 @@ data:extend({
     place_result = "teleportation-portal",
     stack_size = 1
   },
-  --[[{
-    type = "item",
-    name = "teleportation-telesender",
-    icon = "__Teleportation__/graphics/telesender-icon.png",
-    flags = {"goes-to-quickbar"},
-    subgroup = "teleportation",
-    order = "f[telesender]",
-    place_result = "teleportation-telesender",
-    stack_size = 10
-  }]]
 })
+if settings.startup["Teleportation-telelogistics-enabled"].value then
+  data:extend({
+    {
+      type = "item",
+      name = "teleportation-teleprovider",
+      icon = "__Teleportation__/graphics/teleprovider-icon.png",
+      flags = {"goes-to-quickbar"},
+      subgroup = "teleportation",
+      order = "a[items]-b[teleportation-teleprovider]",
+      place_result = "teleportation-teleprovider",
+      stack_size = 50
+    },
+  })
+end

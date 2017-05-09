@@ -50,3 +50,33 @@ data:extend({
 		}
 	}
 })
+
+if settings.startup["Teleportation-telelogistics-enabled"].value then
+  data:extend({
+    {
+      type = "technology",
+      name = "teleportation-telelogistics",
+      icon = "__Teleportation__/graphics/telelogistics-technology.png",
+      icon_size = 128,
+      effects = {
+        {
+          type = "unlock-recipe",
+          recipe = "teleportation-teleprovider"
+        }
+      },
+      prerequisites = {"logistic-system"},
+      unit = {
+        count = 300,
+        ingredients =
+        {
+          {"science-pack-1", 1},
+          {"science-pack-2", 1},
+          {"science-pack-3", 1},
+          {"production-science-pack", 1},
+          {"high-tech-science-pack", 1}
+        },
+        time = 60
+      }
+    },
+  })
+end

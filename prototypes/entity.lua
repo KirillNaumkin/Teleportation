@@ -117,23 +117,17 @@ data:extend({
       priority = "high",
       width = 128,
       height = 128,
-      shift = {0, 0}
+      --shift = {0, 0}
+      shift = {0.28, 0.2}
     }
-    --[[circuit_wire_connection_point =
+    --[[picture =
     {
-      shadow =
-      {
-        red = {0.734375, 0.453125},
-        green = {0.609375, 0.515625},
-      },
-      wire =
-      {
-        red = {0.40625, 0.21875},
-        green = {0.40625, 0.375},
-      }
-    },
-    circuit_connector_sprites = get_circuit_connector_sprites({0.1875, 0.15625}, nil, 18),
-    circuit_wire_max_distance = 7.5]]
+      filename = "__Teleportation__/graphics/null.png",
+      priority = "high",
+      width = 0,
+      height = 0,
+      shift = {0, 0}
+    }]]
 	},
   {
     type = "electric-energy-interface",
@@ -158,139 +152,54 @@ data:extend({
       input_flow_limit = "5MW",
       output_flow_limit = "0W"
     },
-    picture =
     {
-      filename = "__Teleportation__/graphics/null.png",
+      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
       priority = "extra-high",
-      width = 0,
-      height = 0,
-      line_length = 0,
-      frame_count = 0,
+      width = 128,
+      height = 128,
+      line_length = 16,
+      frame_count = 16,
       shift = {0, 0}
     },
     charge_animation =
     {
-      filename = "__Teleportation__/graphics/null.png",
-      width = 0,
-      height = 0,
-      line_length = 0,
-      frame_count = 0,
+      filename = "__Teleportation__/graphics/tiers/orange/spritesheet.png",
+      width = 128,
+      height = 128,
+      line_length = 16,
+      frame_count = 16,
       shift = {0, 0},
-      animation_speed = 0
+      animation_speed = 0.5
     },
     charge_cooldown = 30,
     charge_light = {intensity = 0.3, size = 7},
     discharge_animation =
     {
-      filename = "__Teleportation__/graphics/null.png",
-      width = 0,
-      height = 0,
-      line_length = 0,
-      frame_count = 0,
+      filename = "__PersonalTeleporter__/graphics/tiers/orange/spritesheet.png",
+      width = 128,
+      height = 128,
+      line_length = 16,
+      frame_count = 16,
       shift = {0, 0},
-      animation_speed = 0
+      animation_speed = 0.5
     },
     discharge_cooldown = 60,
     discharge_light = {intensity = 0.7, size = 7},
   },
-  {
-		type = "train-stop",
-		name = "teleportation-beacon-marker",
-    localised_name = {"entity-name.teleportation-beacon"},
-		icon = "__Teleportation__/graphics/null.png",
-		flags = {"placeable-off-grid", "placeable-neutral", "player-creation", "filter-directions", "not-blueprintable", "not-deconstructable"},
-    friendly_map_color = {r=1, g=1, b=0},
-		order = "y",
-		selectable_in_game = false,
-		minable = {mining_time = 1, result = "train-stop"},
-		max_health = 1,
-		render_layer = "tile",
-		final_render_layer = "tile",
-		collision_box = {{0,0}, {0,0}},
-		selection_box = {{0,0}, {0,0}},
-		drawing_box = {{0,0}, {0,0}},
-		tile_width = 1,
-		tile_height = 1,
-		animation_ticks_per_frame = 0,
-	
-		vehicle_impact_sound =	{ filename = "__base__/sound/car-metal-impact.ogg", volume = 0 },
-		working_sound =
-		{
-			sound = { filename = "__base__/sound/train-stop.ogg", volume = 0 }
-		},
-		circuit_wire_connection_points = {},
-		circuit_connector_sprites =
-		{
-			get_circuit_connector_sprites({0.5625-1, 1.03125}, {0.5625-1, 1.03125}, 0), --N
-			get_circuit_connector_sprites({-0.78125, 0.28125-1}, {-0.78125, 0.28125-1}, 6), --E
-			get_circuit_connector_sprites({-0.28125+1, 0.28125}, {-0.28125+1, 0.28125}, 0), --S
-			get_circuit_connector_sprites({0.03125, 0.28125+1}, {0.03125, 0.28125+1}, 6), --W
-		},
-	}
 })
 
---[[
-local telesender = util.table.deepcopy(data.raw["inserter"]["fast-inserter"])
-telesender.name = "Test"
-telesender.energy_source =
-{
-	type = "electric",
-	usage_priority = "secondary-input",
-	drain = "0.8kW"
-}
-telesender.name = "teleportation-telesender"
-telesender.icon = "__Teleportation__/graphics/telesender-icon.png"
-telesender.hand_base_picture =
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.hand_closed_picture = 
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.hand_open_picture =
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.hand_base_shadow =
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.hand_closed_shadow =
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.hand_open_shadow =
-{
-	filename = "__Teleportation__/graphics/null.png",
-	width = 0,
-	height = 0
-}
-telesender.platform_picture =
-{
-	sheet=
-	{
-		filename = "__Teleportation__/graphics/telesender-platform.png",
-		priority = "extra-high",
-		width = "46",
-		height = "46"
-	}
-}
-
-telesender.energy_per_movement = 4500
-telesender.energy_per_rotation = 4500
-telesender.rotation_speed = 1
-telesender.extension_speed = 1
-telesender.minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-telesender"}
-data:extend({telesender})
-]]
+if settings.startup["Teleportation-telelogistics-enabled"].value then
+  local teleprovider = util.table.deepcopy(data.raw["container"]["steel-chest"])
+  teleprovider.name = "teleportation-teleprovider"
+  teleprovider.icon = "__Teleportation__/graphics/teleprovider-icon.png"
+  teleprovider.minable = {mining_time = 1, result = "teleportation-teleprovider"}
+  teleprovider.inventory_size = 1
+  teleprovider.picture = {
+    filename = "__Teleportation__/graphics/teleprovider-entity.png",
+    priority = "extra-high",
+    width = 38,
+    height = 32,
+    shift = {0.09375, 0}
+  }
+  data:extend({teleprovider})
+end

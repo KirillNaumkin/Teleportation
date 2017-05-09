@@ -37,3 +37,19 @@ data:extend({
 		energy_required = 30
 	},
 })
+if settings.startup["Teleportation-telelogistics-enabled"].value then
+  data:extend({
+    {
+      type = "recipe",
+      name = "teleportation-teleprovider",
+      enabled = false,
+      ingredients =	{
+        {"logistic-chest-active-provider", 1},
+        {"advanced-circuit", 10},
+        {"processing-unit", 1}
+      },
+      result = "teleportation-teleprovider",
+      energy_required = 5
+    },
+  })
+end
