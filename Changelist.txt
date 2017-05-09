@@ -97,3 +97,22 @@
 0.15.0:
 • updated for Factorio 0.15.x;
 • reduced equipment cost.
+
+0.15.1:
+• fixed that Beacons weren't blueprintable; great thanks to wormmus for his bug report!
+
+0.15.2:
+• fixed settings locale;
+• fixed jump failure descriptions.
+
+0.15.3:
+• fixed performance (minor optimizations);
+• changed GUI styling (need feedback);
+• added TELELOGISTICS - an option (available through the in-game mods settings menu) to send items from Teleproviders to the Beacons.
+
+0.15.4:
+• fixed crash when trying to rearrange beacons in list
+
+0.15.5:
+• fixed some crashes;
+• changed Personal Teleporter equipment energy calculation - now all equipment units are being summed, so you can perform a further jumps.

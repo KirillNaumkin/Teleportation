@@ -327,8 +327,8 @@ function Teleportation_ActivateBeacon(player, beacon_key, silent_mode)
       end
     end
   end
-  local equipment = Teleportation_GetPlayerEquipment(player, required_energy_eq)
-  if equipment then
+  local equipment_energy = Teleportation_GetPlayerEquipmentChargeLevel(player)
+  if equipment_energy and equipment_energy >= 0 then
     if player.vehicle and player.vehicle.valid then
       failure_message = {"message-sitting-in-vehicle"}
       if not silent_mode then
@@ -336,12 +336,12 @@ function Teleportation_ActivateBeacon(player, beacon_key, silent_mode)
       end
       return false
     end
-    if equipment.energy >= required_energy_eq then
+    if equipment_energy >= required_energy_eq then
       local receiving_beacon = beacon
       if receiving_beacon.energy_interface.energy >= required_energy_beacon then
         Teleportation_BlockProjectiles(player)
         Teleportation_Teleport(player, receiving_beacon.entity.surface.name, receiving_beacon.entity.position)
-        equipment.energy = equipment.energy - required_energy_eq
+        Teleportation_DischargeEquipment(player, required_energy_eq)
         receiving_beacon.energy_interface.energy = receiving_beacon.energy_interface.energy - required_energy_beacon
         return true
       else --receiving_beacon.energy_interface.energy < required_energy_beacon
@@ -351,8 +351,8 @@ function Teleportation_ActivateBeacon(player, beacon_key, silent_mode)
         end
         return false
       end
-    else --equipment.energy < required_energy_eq
-      failure_message = {"message-no-power-pt", math.floor(equipment.energy * 100 / required_energy_eq)}
+    else --equipment_energy < required_energy_eq
+      failure_message = {"message-no-power-pt", math.floor(equipment_energy * 100 / required_energy_eq)}
       player.print(failure_message)
       return false
     end
@@ -387,21 +387,21 @@ function Teleportation_ActivatePortal(player, destination_position)
     else
       local distance = Common_GetDistanceBetween(player.position, destination_position)
       local energy_required = Teleportation.config.energy_in_equipment_to_use_portal * distance
-      local equipment = Teleportation_GetPlayerEquipment(player, energy_required)
-      if equipment then
-        if equipment.energy >= energy_required then
+      local equipment_energy = Teleportation_GetPlayerEquipmentChargeLevel(player)
+      if equipment_energy >= 0 then
+        if equipment_energy >= energy_required then
           local valid_position = Teleportation_CheckDestinationPosition(destination_position, player)
           if valid_position then
             Teleportation_BlockProjectiles(player)
             player.teleport(valid_position, player.surface)
             global.Teleportation.player_settings[player.name].used_portal_on_tick = game.tick
-            equipment.energy = equipment.energy - energy_required
+            Teleportation_DischargeEquipment(player, energy_required)
             return true
           else
             return false
           end
-        else --equipment.energy < energy_required
-          local failure_message = {"message-no-power-pt", math.floor(equipment.energy * 100 / energy_required)}
+        else --equipment_energy < energy_required
+          local failure_message = {"message-no-power-pt", math.floor(equipment_energy * 100 / energy_required)}
           player.print(failure_message)
           return false
         end
@@ -412,6 +412,26 @@ function Teleportation_ActivatePortal(player, destination_position)
       end
     end
 	end
+end
+
+function Teleportation_DischargeEquipment(player, energy_to_discharge)
+  if player ~= nil and player.valid and player.connected then
+    local armor_as_item_stack = player.get_inventory(defines.inventory.player_armor)[1]
+    if armor_as_item_stack and armor_as_item_stack.valid and armor_as_item_stack.valid_for_read and armor_as_item_stack.grid and armor_as_item_stack.grid.valid then
+      local equipment = armor_as_item_stack.grid.equipment
+      for i, item in pairs(equipment) do
+        if item.name == "teleportation-equipment" then
+          if item.energy >= energy_to_discharge then
+            item.energy = item.energy - energy_to_discharge
+            return
+          else
+            energy_to_discharge = energy_to_discharge - item.energy
+            item.energy = 0
+          end
+        end
+      end
+    end
+  end
 end
 
 --Tries to find the nost charged beacon, the player stays on
@@ -437,8 +457,8 @@ function Teleportation_GetSendingBeaconUnderPlayer(player)
 end
 
 --Gets the most charged equipment to teleport
-function Teleportation_GetPlayerEquipment(player, energy_required)
-  local most_charged = false
+function Teleportation_GetPlayerEquipmentChargeLevel(player)
+  local charge_level = 0
   if player ~= nil and player.valid and player.connected then
     local armor_as_item_stack = player.get_inventory(defines.inventory.player_armor)[1]
     if armor_as_item_stack and armor_as_item_stack.valid and armor_as_item_stack.valid_for_read and armor_as_item_stack.grid and armor_as_item_stack.grid.valid then
@@ -446,20 +466,14 @@ function Teleportation_GetPlayerEquipment(player, energy_required)
       local has_equipment = false
       for i, item in pairs(equipment) do
         if item.name == "teleportation-equipment" then
-          if not most_charged then
-            most_charged = item
-          end
-          if most_charged.energy < item.energy then
-            most_charged = item
-          end
-          if item.energy >= energy_required then
-						return item
-					end
+          has_equipment = true
+          charge_level = charge_level + item.energy
         end
       end
+      if not has_equipment then return -1 end
     end
   end
-  return most_charged
+  return charge_level
 end
 
 --Returns non-colliding position (neighboring to the position targeted with jump targeter) where player can teleport to

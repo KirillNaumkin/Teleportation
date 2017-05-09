@@ -84,7 +84,9 @@ script.on_event(defines.events.on_gui_click, function(event)
     return
   end
   Teleportation_ProcessGuiClick(event.element)
-  Telelogistics_ProcessGuiClick(event.element)
+  if event.element and event.element.valid then
+    Telelogistics_ProcessGuiClick(event.element)
+  end
 end)
 
 --===================================================================--

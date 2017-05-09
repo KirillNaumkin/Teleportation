@@ -108,7 +108,9 @@ function Telelogistics_ProcessProvider(provider)
   for item_name, count in pairs(provider_inventory_contents) do
     if item_name and count then 
       local inserted_count = beacon_inventory.insert({name = item_name, count = count})
-      provider_inventory.remove({name = item_name, count = inserted_count})
+      if inserted_count > 0 then
+        provider_inventory.remove({name = item_name, count = inserted_count})
+      end
     end
   end
 end
