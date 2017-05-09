@@ -1,10 +1,11 @@
 {
   "name": "Teleportation",
-  "version": "0.15.1",
+  "version": "0.15.3",
   "title": "Teleportation",
   "author": "Apriori",
-  "description": "Devices for teleportation. Techs for mid- and late-game. You can teleport either to the special beacons or as far as you see (try to use with the Zoom mod). For maximum details see changelist in mod's folder.",
+  "description": "Devices for the teleportation. Techs for mid- and late-game. You can teleport either to the special beacons or as far as you see (also usable in zoom-ro-world mapview). You can also use Telelogistics part after both enabling it through the in-game mod settings menu and researching the technology. Need feedback about telelogistics energy cost.",
   "factorio_version": "0.15",
+  "dependencies": ["base >= 0.15.8"],
   "contact": "https://forums.factorio.com/memberlist.php?mode=viewprofile&u=13866",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=93&t=31741"
 }
