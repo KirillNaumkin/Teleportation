@@ -794,6 +794,7 @@ function Teleportation_EnergyProgressUpdate()
 end
 
 function Teleportation_ShowBeaconReminder(beacon, player)
+  if not beacon then return end
   local window
   local progress
   if not player.gui.center["teleportation_beacon_reminder"] then
