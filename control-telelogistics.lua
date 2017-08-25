@@ -114,7 +114,10 @@ function Telelogistics_ProcessProvider(provider)
       -- of that type and limit ourselves to how much we will try to insert.
       local remainder = top_up_count(beacon_inventory, item_name)
       if  remainder > 0 then
-        local inserted_count = beacon_inventory.insert({name = item_name, count = remainder})
+        -- Need to limit the amount we transfer to the amount availalble or the top-up value, whichever is smaller.
+        local amount_to_transfer = count
+        if amount_to_transfer  > remainder then amount_to_transfer = remainder end
+        local inserted_count = beacon_inventory.insert({name = item_name, count = amount_to_transfer})
         if inserted_count > 0 then
           provider_inventory.remove({name = item_name, count = inserted_count})
         end
