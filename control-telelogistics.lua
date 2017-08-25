@@ -107,14 +107,48 @@ function Telelogistics_ProcessProvider(provider)
   local provider_inventory_contents = provider_inventory.get_contents()
   for item_name, count in pairs(provider_inventory_contents) do
     if item_name and count then 
-      local inserted_count = beacon_inventory.insert({name = item_name, count = count})
-      if inserted_count > 0 then
-        provider_inventory.remove({name = item_name, count = inserted_count})
+      --We don't ever want to add more than enough to fill up a single stack of the item
+      --If we did, we could "block" the teleporter if we are trying to send multiple types
+      -- of items through the same teleporter. 
+      -- Therefore, we get a count of how many items the beacon already has in its inventory
+      -- of that type and limit ourselves to how much we will try to insert.
+      local remainder = top_up_count(beacon_inventory, item_name)
+      if  remainder > 0 then
+        -- Need to limit the amount we transfer to the amount availalble or the top-up value, whichever is smaller.
+        local amount_to_transfer = count
+        if amount_to_transfer  > remainder then amount_to_transfer = remainder end
+        local inserted_count = beacon_inventory.insert({name = item_name, count = amount_to_transfer})
+        if inserted_count > 0 then
+          provider_inventory.remove({name = item_name, count = inserted_count})
+        end
       end
     end
   end
 end
 
+-- helper function to return how many items of type "name" we need to add to
+-- fill up a whole stack's worth or items in "chest". If "chest" already contains more
+-- than a stack size or these items then just return 0
+function top_up_count(chest, name)
+  local total_count=0
+  -- loop over all items in the chest ant return a count of the total number of items in there
+  -- not sure if different stacks of the same item show up as multiples so just assume they do
+  -- and total them up
+  local max_stack = 100 -- need to fill this in properly by queerying the stack size for this particular item
+  local inventory_contents =chest.get_contents()
+    for item_name, item_count in pairs(inventory_contents) do
+      if item_name == name then
+        total_count = total_count + item_count
+      end
+    end
+  local remaining = max_stack - total_count
+  if remaining >=0 then
+    return remaining
+  else
+    return 0
+  end
+end
+ 
 --===================================================================--
 --############################### GUI ###############################--
 --===================================================================--
