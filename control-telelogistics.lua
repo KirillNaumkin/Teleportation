@@ -77,18 +77,14 @@ end
 function Telelogistics_ProcessProvidersQueue()
   Telelogistics_InitializeGeneralGlobals()
   if #global.Telelogistics.teleproviders == 0 then return end
-  local queue_members_to_process = 10
   local last_index = global.Telelogistics.index_of_last_processed_provider or 0
-  for processed = 1, queue_members_to_process, 1 do
-    local current_index = last_index + 1
-    if global.Telelogistics.teleproviders[current_index] then
-      Telelogistics_ProcessProvider(global.Telelogistics.teleproviders[current_index])
-      last_index = current_index
-    else
-      last_index = 0
-    end
+  local current_index = last_index + 1
+  if global.Telelogistics.teleproviders[current_index] then
+    Telelogistics_ProcessProvider(global.Telelogistics.teleproviders[current_index])
+    global.Telelogistics.index_of_last_processed_provider = current_index
+  else
+    global.Telelogistics.index_of_last_processed_provider = 0
   end
-  global.Telelogistics.index_of_last_processed_provider = last_index
 end
 
 function Telelogistics_ProcessProvider(provider)
@@ -107,11 +103,37 @@ function Telelogistics_ProcessProvider(provider)
   local provider_inventory_contents = provider_inventory.get_contents()
   for item_name, count in pairs(provider_inventory_contents) do
     if item_name and count then 
-      local inserted_count = beacon_inventory.insert({name = item_name, count = count})
-      if inserted_count > 0 then
-        provider_inventory.remove({name = item_name, count = inserted_count})
+      local remainder = TopUpCount(beacon_inventory, item_name)
+      if  remainder > 0 then
+        -- Need to limit the amount we transfer to the amount availalble or the top-up value, whichever is smaller.
+        local amount_to_transfer = count
+        if amount_to_transfer  > remainder then amount_to_transfer = remainder end
+        local inserted_count = beacon_inventory.insert({name = item_name, count = amount_to_transfer})
+        if inserted_count > 0 then
+          provider_inventory.remove({name = item_name, count = inserted_count})
+        end
       end
     end
+  end
+end
+
+function TopUpCount(chest, name)
+  local total_count=0
+  -- loop over all items in the chest ant return a count of the total number of items in there
+  -- not sure if different stacks of the same item show up as multiples so just assume they do
+  -- and total them up
+  local max_stack = 100 -- need to fill this in properly by queerying the stack size for this particular item
+  local inventory_contents =chest.get_contents()
+    for item_name, item_count in pairs(inventory_contents) do
+      if item_name == name then
+        total_count = total_count + item_count
+      end
+    end
+  local remaining = max_stack - total_count
+  if remaining >=0 then
+    return remaining
+  else
+    return 0
   end
 end
 

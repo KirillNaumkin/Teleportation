@@ -116,3 +116,20 @@
 0.15.5:
 • fixed some crashes;
 • changed Personal Teleporter equipment energy calculation - now all equipment units are being summed, so you can perform a further jumps.
+
+0.15.6:
+• fixed Beacon's collision box to make Beacons placable next to the water (see https://forums.factorio.com/viewtopic.php?f=93&t=31741&start=20#p279840 ); thanks to Neemys for his remark!
+• changed telelogistics algorithm to increase performance, now it's 1 Teleprovider processed per tick (60/sec);
+• changed Personal Teleportation equipment stacksize from 1 to 5.
+
+0.15.7:
+• fixed Jump Targeter disappearance when player's inventory is full;
+• added Russian localization for mod name and description.
+
+CURRENT PROGRESS (not released yet):
+
+TODO:
+• add Telelogistics balance: Beacons spend energy to collect items from Teleproviders. Energy is being spent per each item teleported and depends on distance [and item complexity]
+• add global setting: switch if the Beacons should reserve some energy to be ready to accept player's teleportation (or it should be per-Beacon setting)
+• add Telelogistics feature: player can be supplied with requested items via Teleproviders, if he's equipped with Personal Teleporter equipment and it's charged enough and he's got enough free inventory space
+• add ability to copy-paste Teleprovider settings (a linked destination Beacon is being meant)

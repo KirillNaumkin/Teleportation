@@ -25,11 +25,13 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
   elseif event.created_entity.name == "teleportation-teleprovider" then
     Telelogistics_RememberProvider(event.created_entity)
   elseif event.created_entity.name == "teleportation-portal" then
-    local destination = event.created_entity.position
     local player = event.created_entity.last_user
+    player.cursor_stack.set_stack({name = "teleportation-portal", count = 1})
     event.created_entity.destroy()
-    Teleportation_ActivatePortal(player, destination)
-    player.insert({name = "teleportation-portal", count = 1})
+  elseif event.created_entity.name == "entity-ghost" then
+    if event.created_entity.ghost_name == "teleportation-portal" then
+      event.created_entity.destroy()
+    end
   end
 end)
 

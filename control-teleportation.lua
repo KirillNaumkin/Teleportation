@@ -368,7 +368,7 @@ end
 --Tries to jump into the position, the jump targeter targets at. (sorry for my Eng)
 function Teleportation_ActivatePortal(player, destination_position)
 	if Common_IsHolding({name="teleportation-portal", count=1}, player) then
-    local cooldown_in_ticks_between_usages = 30
+    local cooldown_in_ticks_between_usages = 15
     Teleportation_InitializePlayerGlobals(player)
     if player.vehicle and player.vehicle.valid then
       failure_message = {"message-sitting-in-vehicle"}
@@ -794,6 +794,7 @@ function Teleportation_EnergyProgressUpdate()
 end
 
 function Teleportation_ShowBeaconReminder(beacon, player)
+  if not beacon then return end
   local window
   local progress
   if not player.gui.center["teleportation_beacon_reminder"] then
