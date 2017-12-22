@@ -126,6 +126,13 @@
 • fixed Jump Targeter disappearance when player's inventory is full;
 • added Russian localization for mod name and description.
 
+0.16.0:
+• fixed several bugs and crashes;
+• updated to v16.
+
+0.16.1:
+• annoying spamming is turned off (sorry, my bad)
+
 CURRENT PROGRESS (not released yet):
 
 TODO:

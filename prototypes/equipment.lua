@@ -20,9 +20,11 @@ data:extend(
     {
       type = "electric",
       buffer_capacity = "100MJ",
-      input_flow_limit = "500kW",
+      --input_flow_limit = "500kW",
+      input_flow_limit = "10MW",
       output_flow_limit = "0W",
-      usage_priority = "primary-input"
+      --usage_priority = "primary-input"
+      usage_priority = "secondary-input"
     },
     categories = {"armor"}
   },

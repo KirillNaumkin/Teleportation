@@ -171,8 +171,10 @@ end
 function Teleportation_GetBeaconsSorted(list, force_name, sort_order, player)
   local sorted_beacons = {}
   for i, beacon in pairs(list) do
-    if force_name == beacon.entity.force.name or settings.global["Teleportation-all-beacons-for-all"].value then
-      table.insert(sorted_beacons, beacon)
+    if beacon.entity and beacon.entity.valid then
+      if force_name == beacon.entity.force.name or settings.global["Teleportation-all-beacons-for-all"].value then
+        table.insert(sorted_beacons, beacon)
+      end
     end
   end
   if sort_order == 1 then
@@ -608,13 +610,13 @@ function Teleportation_ShowMainWindow(player)
   if player ~= nil and player.valid and player.connected then
     local gui = player.gui.left
     if not gui.teleportation_main_window then
-      local window = gui.add({type="flow", name="teleportation_main_window", direction="vertical", style="teleportation_thin_flow"})
-      local grid = window.add({type="table", name="teleportation_main_window_grid", colspan=2})
+      local window = gui.add({type="flow", name="teleportation_main_window", direction="vertical"})
+      local grid = window.add({type="table", name="teleportation_main_window_grid", column_count=2})
       grid.style.cell_spacing = 0
       grid.style.horizontal_spacing = 0
       grid.style.vertical_spacing = 0
       local window_menu_paging = grid.add({type="frame", name="teleportation_window_menu_paging", direction="horizontal", style="teleportation_thin_frame"})
-      local buttonFlow = window_menu_paging.add({type="flow", name="teleportation_paging", direction="horizontal", colspan=2, style="teleportation_button_flow"})
+      local buttonFlow = window_menu_paging.add({type="flow", name="teleportation_paging", direction="horizontal", column_count=2})
       local button
       button = buttonFlow.add({type="button", name="teleportation_button_page_back", style="teleportation_button_style_arrow_left"})
       button.tooltip = {"tooltip-button-page-prev"}
@@ -622,7 +624,7 @@ function Teleportation_ShowMainWindow(player)
       button = buttonFlow.add({type="button", name="teleportation_button_page_forward", style="teleportation_button_style_arrow_right"})
       button.tooltip = {"tooltip-button-page-next"}
       local window_menu_sorting = grid.add({type="frame", name="teleportation_window_menu_sorting", direction="horizontal", style="teleportation_thin_frame"})
-      buttonFlow = window_menu_sorting.add({type="flow", name="teleportation_buttons_sorting", direction="horizontal", colspan=2, style="teleportation_button_flow"})
+      buttonFlow = window_menu_sorting.add({type="flow", name="teleportation_buttons_sorting", direction="horizontal", column_count=2})
       buttonFlow.add({type="label", name="teleportation_sorting_label", caption={"label-sort-by"}, style="teleportation_label_style"})
       button = buttonFlow.add({type="button", name="teleportation_button_sort_global", style="teleportation_button_style_globus"})
       button.tooltip = {"tooltip-button-sort-global"}
@@ -697,12 +699,12 @@ end
 --Adds rob with buttons and labels. One row represents one beacon. Index-based naming is not good, because rows should be sortable.
 function Teleportation_AddRow(container, beacon, index, sort_type)
   local frame = container.add({type="frame", name="teleportation_buttons_tools_" .. index, direction="horizontal", style="teleportation_thin_frame"})
-  local buttonFlow = frame.add({type="flow", name=beacon.key, direction="horizontal", style="teleportation_button_flow"})
+  local buttonFlow = frame.add({type="flow", name=beacon.key, direction="horizontal"})
   buttonFlow.add({type="button", name="teleportation_button_activate", style="teleportation_button_style_teleport"})
   local button = buttonFlow.add({type="button", name="teleportation_button_rename", style="teleportation_button_style_edit"})
 	button.tooltip = {"tooltip-button-rename"}
   if sort_type == 1 then
-    local replacerFlow = buttonFlow.add({type="flow", name=beacon.key, direction="vertical", style="teleportation_thin_flow"})
+    local replacerFlow = buttonFlow.add({type="flow", name=beacon.key, direction="vertical"})
     replacerFlow.add({type="button", name="teleportation_button_order_up", style="teleportation_button_style_arrow_up"})
     replacerFlow.add({type="button", name="teleportation_button_order_down", style="teleportation_button_style_arrow_down"})
   end

@@ -44,6 +44,7 @@ function Telelogistics_RememberProvider(entity)
     key = Common_CreateEntityKey(entity)
   }
   table.insert(global.Telelogistics.teleproviders, provider)
+  --game.players[1].print("Remembered")
 end
 
 --Removes destroyed provider from the global list
@@ -53,6 +54,7 @@ function Telelogistics_ForgetProvider(entity)
     local provider = global.Telelogistics.teleproviders[i]
     if provider.key == key_to_forget then
       table.remove(global.Telelogistics.teleproviders, i)
+      --game.players[1].print("Forgot")
       return
     end
   end
@@ -63,6 +65,7 @@ function Telelogistics_LinkProviderWithBeacon(provider_key, beacon_key)
   local beacon = Common_GetBeaconByKey(beacon_key)
   if provider and beacon then
     provider.receiver_key = beacon_key
+    --game.players[1].print("Linked")
   end
 end
 
@@ -70,6 +73,7 @@ function Telelogistics_CancelProviderLink(provider_key)
   local provider = Common_GetTeleproviderByKey(provider_key)
   if provider then
     provider.receiver_key = nil
+    --game.players[1].print("Unlinked")
   end
 end
 
@@ -90,11 +94,16 @@ end
 function Telelogistics_ProcessProvider(provider)
   if not Common_IsEntityOk(provider.entity) then
     table.remove(global.Telelogistics.teleproviders, provider)
+    --game.players[1].print("Processing: provider is not valid")
     return
   end
-  if not provider.receiver_key then return end
+  if not provider.receiver_key then
+    --game.players[1].print("Processing: receiver is not set")
+    return
+  end
   local beacon = Common_GetBeaconByKey(provider.receiver_key)
-  if not beacon then
+  if not beacon or not beacon.entity or not beacon.entity.valid then
+    --game.players[1].print("Processing: not linked")
     provider.receiver_key = nil
     return
   end
@@ -111,6 +120,7 @@ function Telelogistics_ProcessProvider(provider)
         local inserted_count = beacon_inventory.insert({name = item_name, count = amount_to_transfer})
         if inserted_count > 0 then
           provider_inventory.remove({name = item_name, count = inserted_count})
+          --game.players[1].print("Provider processed")
         end
       end
     end
@@ -157,6 +167,7 @@ end
 function Telelogistics_OpenLinkerWindow(player, provider_key)
   local provider = Common_GetTeleproviderByKey(provider_key)
   if not provider then return end
+  if not player.force.name == provider.entity.force.name then return end
   local gui = player.gui.center
   if gui.teleportation_linker_window then
     return
@@ -165,7 +176,7 @@ function Telelogistics_OpenLinkerWindow(player, provider_key)
   local scroll = window.add({type="scroll-pane", name="teleportation_linkable_beacons_scroll", direction="vertical"})
   scroll.style.maximal_height = 150
   scroll.style.minimal_width = 200
-  local gui_table = scroll.add({type="table", name=provider_key, colspan=1})
+  local gui_table = scroll.add({type="table", name=provider_key, column_count=1})
   gui_table.style.cell_spacing = 0
   local list = global.Teleportation.beacons
   Teleportation_InitializePlayerGlobals(player)

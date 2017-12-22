@@ -7,12 +7,12 @@ data.raw["gui-style"].default["teleportation_thin_flow"] = {
 }
 data.raw["gui-style"].default["teleportation_button_flow"] = {
   type = "flow_style",
-  parent="flow_style",
+  --parent="flow_style",
   horizontal_spacing=1,
 }
 data.raw["gui-style"].default["teleportation_thin_frame"] = {
   type = "frame_style",
-  parent="frame_style",
+  --parent="frame_style",
   top_padding  = 2,
   bottom_padding = 2,
 }
@@ -25,7 +25,7 @@ data.raw["gui-style"].default["teleportation_label_style"] = {
 }
 data.raw["gui-style"].default["teleportation_button_style"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   top_padding = 1,
   right_padding = 5,
   bottom_padding = 1,
@@ -40,7 +40,7 @@ data.raw["gui-style"].default["teleportation_button_style"] = {
 }
 data.raw["gui-style"].default["teleportation_main_button_style"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -95,7 +95,7 @@ data.raw["gui-style"].default["teleportation_main_button_style"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_teleport"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -150,7 +150,7 @@ data.raw["gui-style"].default["teleportation_button_style_teleport"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_edit"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -205,7 +205,7 @@ data.raw["gui-style"].default["teleportation_button_style_edit"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_globus"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -260,7 +260,7 @@ data.raw["gui-style"].default["teleportation_button_style_globus"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_sort_alphabet"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -315,7 +315,7 @@ data.raw["gui-style"].default["teleportation_button_style_sort_alphabet"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_sort_from_player"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -370,7 +370,7 @@ data.raw["gui-style"].default["teleportation_button_style_sort_from_player"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_sort_from_start"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -425,7 +425,7 @@ data.raw["gui-style"].default["teleportation_button_style_sort_from_start"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_arrow_left"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 16,
   height = 32,
   top_padding = 0,
@@ -480,7 +480,7 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_left"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_arrow_right"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 16,
   height = 32,
   top_padding = 0,
@@ -535,7 +535,7 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_right"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_arrow_up"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 16,
   top_padding = 0,
@@ -590,7 +590,7 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_up"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_arrow_down"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 16,
   top_padding = 0,
@@ -645,7 +645,7 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_down"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_link_small"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 16,
   top_padding = 0,
@@ -700,7 +700,7 @@ data.raw["gui-style"].default["teleportation_button_style_link_small"] = {
 
 data.raw["gui-style"].default["teleportation_button_style_cancel_link"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 32,
   top_padding = 0,
@@ -742,7 +742,7 @@ data.raw["gui-style"].default["teleportation_button_style_cancel_link"] = {
       filename = "__Teleportation__/graphics/buttons.png",
       width = 32,
       height = 32,
-      x = 2,
+      x = 224,
       y = 64,
     }
   },
@@ -755,7 +755,7 @@ data.raw["gui-style"].default["teleportation_button_style_cancel_link"] = {
 
 data.raw["gui-style"].default["teleportation_sprite_style_done_small"] = {
   type = "button_style",
-  parent = "button_style",
+  --parent = "button_style",
   width = 32,
   height = 16,
   top_padding = 0,
@@ -810,7 +810,7 @@ data.raw["gui-style"].default["teleportation_sprite_style_done_small"] = {
 
 data.raw["gui-style"].default["teleportation_textbox"] = {
   type = "textfield_style",
-  parent = "textfield_style",
+  --parent = "textfield_style",
     minimal_width = 300,
     maximal_width = 300,
 }

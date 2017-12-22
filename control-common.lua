@@ -10,7 +10,7 @@ end
 
 --Calculates key for entity depending on it's position. It's entity's UID.
 function Common_CreateEntityName(entity)
-  return "x:" .. entity.position.x .. ",y:" .. entity.position.y .. ",s:" .. entity.surface.name
+  return "x:" .. entity.position.x .. ", y:" .. entity.position.y .. ", s:" .. entity.surface.name
 end
 
 --Function to shorten checks

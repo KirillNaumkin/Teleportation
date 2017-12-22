@@ -46,7 +46,7 @@ portal_targeter.attack_parameters =
 {
 	type = "projectile",
 	ammo_category = "melee",
-	cooldown = 30,
+	cooldown = 15,
 	projectile_center = {0, 0},
 	projectile_creation_distance = 1.4,
 	range = 2,
@@ -91,6 +91,7 @@ data:extend({
 		type = "container",
 		name = "teleportation-beacon",
 		icon = "__Teleportation__/graphics/icon.png",
+    icon_size = 32,
 		flags = {"placeable-neutral", "placeable-player", "player-creation"},
 		minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-beacon"},
 		max_health = 150,
@@ -106,7 +107,7 @@ data:extend({
 				percent = 90
 			}
 		},
-    collision_box = {{-2, -2}, {2,2}},
+    collision_box = {{-2, -2}, {1.9,1.9}},
     collision_mask = {"water-tile", "item-layer", "object-layer"},
     selection_box = {{-2, -2}, {2, 2}},
     render_layer = decorative,
@@ -134,6 +135,7 @@ data:extend({
     name = "teleportation-beacon-electric-energy-interface",
     localised_name = {"entity-name.teleportation-beacon"},
     icon = "__Teleportation__/graphics/icon.png",
+    icon_size = 32,
     flags = {"placeable-neutral", "player-creation", "not-blueprintable", "not-deconstructable"},
     minable = {hardness = 0.2, mining_time = 0.5, result = "teleportation-beacon-electric-energy-interface"},
     destructible = false,
@@ -192,6 +194,7 @@ if settings.startup["Teleportation-telelogistics-enabled"].value then
   local teleprovider = util.table.deepcopy(data.raw["container"]["steel-chest"])
   teleprovider.name = "teleportation-teleprovider"
   teleprovider.icon = "__Teleportation__/graphics/teleprovider-icon.png"
+  teleprovider.icon_size = 32
   teleprovider.minable = {mining_time = 1, result = "teleportation-teleprovider"}
   teleprovider.inventory_size = 1
   teleprovider.picture = {

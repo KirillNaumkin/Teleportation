@@ -36,7 +36,7 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 end)
 
 --When beacon, belonging to some force, get removed, all players of this force should get their GUI updated.
-script.on_event({defines.events.on_preplayer_mined_item, defines.events.on_robot_pre_mined, defines.events.on_entity_died}, function(event)
+script.on_event({defines.events.on_pre_player_mined_item, defines.events.on_robot_pre_mined, defines.events.on_entity_died}, function(event)
   local entity = event.entity
   if event.entity.name == "teleportation-beacon" then
     Teleportation_ForgetBeacon(entity)
