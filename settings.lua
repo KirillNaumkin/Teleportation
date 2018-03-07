@@ -19,6 +19,13 @@ data:extend({
 		per_user = true,
 	},
 	{
+		type = "bool-setting",
+		name = "Teleportation-sound-enabled",
+		setting_type = "runtime-per-user",
+		default_value = true,
+		per_user = true,
+	},
+	{
 		type = "int-setting",
 		name = "Teleportation-page-size",
 		setting_type = "runtime-per-user",
