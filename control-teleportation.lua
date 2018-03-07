@@ -398,6 +398,9 @@ function Teleportation_ActivatePortal(player, destination_position)
             player.teleport(valid_position, player.surface)
             global.Teleportation.player_settings[player.name].used_portal_on_tick = game.tick
             Teleportation_DischargeEquipment(player, energy_required)
+            if player.mod_settings["Teleportation-sound-enabled"].value then
+              player.surface.create_entity({name = "teleport-sound-effect", position = player.position})
+            end
             return true
           else
             return false
@@ -497,6 +500,9 @@ function Teleportation_Teleport(player, surface_name, destination_position)
   surface_name = surface_name or "nauvis"
   --player.teleport({destination_position.x-0.3, destination_position.y + 0.1}, surface_name)
   player.teleport({destination_position.x, destination_position.y+0.1}, surface_name)
+  if player.mod_settings["Teleportation-sound-enabled"].value then
+    player.surface.create_entity({name = "teleport-sound-effect", position = player.position})
+  end
 end
 
 --Destroys enemies' projectiles neighboring to the player to prevent them from homing behavior after player's teleportation.
