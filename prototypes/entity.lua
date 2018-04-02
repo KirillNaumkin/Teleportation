@@ -82,7 +82,18 @@ data:extend({
     smoke = "smoke",
     smoke_count = 1,
     smoke_slow_down_factor = 1,
-  }
+  },
+	{
+		type = "sound",
+		name = "teleportation-teleport",
+		variations =
+		{
+			{
+				filename = "__Teleportation__/sound/teleport.ogg",
+				volume = 0.75
+			},
+		},
+	}
 })
 
 --require ("prototypes.entity.demo-circuit-connector-sprites")

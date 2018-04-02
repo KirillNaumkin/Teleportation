@@ -396,6 +396,7 @@ function Teleportation_ActivatePortal(player, destination_position)
           if valid_position then
             Teleportation_BlockProjectiles(player)
             player.teleport(valid_position, player.surface)
+            player.play_sound({path = "teleportation-teleport"})
             global.Teleportation.player_settings[player.name].used_portal_on_tick = game.tick
             Teleportation_DischargeEquipment(player, energy_required)
             return true
@@ -497,6 +498,7 @@ function Teleportation_Teleport(player, surface_name, destination_position)
   surface_name = surface_name or "nauvis"
   --player.teleport({destination_position.x-0.3, destination_position.y + 0.1}, surface_name)
   player.teleport({destination_position.x, destination_position.y+0.1}, surface_name)
+  player.play_sound({path = "teleportation-teleport"})
 end
 
 --Destroys enemies' projectiles neighboring to the player to prevent them from homing behavior after player's teleportation.
