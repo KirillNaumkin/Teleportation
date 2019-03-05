@@ -47,44 +47,26 @@ data.raw["gui-style"].default["teleportation_main_button_style"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 48,
-      height = 48,
-      x = 64,
-      y = 96,
-    }
+      size = {48, 48},
+      position = {64, 96}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 48,
-      height = 48,
-      x = 112,
-      y = 96,
-    }
+      size = {48, 48},
+      position = {112, 96}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 48,
-      height = 48,
-      x = 112,
-      y = 96,
-    }
+      size = {48, 48},
+      position = {112, 96}
   },
   left_click_sound =
   {
@@ -102,44 +84,26 @@ data.raw["gui-style"].default["teleportation_button_style_teleport"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 0,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {0, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 0,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {0, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 0,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {0, 64}
   },
   left_click_sound =
   {
@@ -157,44 +121,26 @@ data.raw["gui-style"].default["teleportation_button_style_edit"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 32,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {32, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 32,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {32, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 32,
-      y = 64,
-    }
+      size = {32,32},
+      position = {32, 64}
   },
   left_click_sound =
   {
@@ -212,44 +158,26 @@ data.raw["gui-style"].default["teleportation_button_style_globus"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 64,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {64, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 64,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {64, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 64,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {64, 64}
   },
   left_click_sound =
   {
@@ -267,44 +195,26 @@ data.raw["gui-style"].default["teleportation_button_style_sort_alphabet"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 96,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {96, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 96,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {96, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 96,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {96, 64}
   },
   left_click_sound =
   {
@@ -322,44 +232,26 @@ data.raw["gui-style"].default["teleportation_button_style_sort_from_player"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 128,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {128, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 128,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {128, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 128,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {128, 64}
   },
   left_click_sound =
   {
@@ -377,44 +269,26 @@ data.raw["gui-style"].default["teleportation_button_style_sort_from_start"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 160,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {160, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 160,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {160, 32},
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 160,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {160, 64}
   },
   left_click_sound =
   {
@@ -432,44 +306,26 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_left"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 16,
-      height = 32,
-      x = 192,
-      y = 0,
-    }
+      size = {16, 32},
+      position = {192, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 16,
-      height = 32,
-      x = 192,
-      y = 32,
-    }
+      size = {16, 32},
+      position = {192, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 16,
-      height = 32,
-      x = 192,
-      y = 64,
-    }
+      size = {16, 32},
+      position = {192, 64}
   },
   left_click_sound =
   {
@@ -487,44 +343,26 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_right"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 16,
-      height = 32,
-      x = 208,
-      y = 0,
-    }
+      size = {16, 32},
+      position = {208, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 16,
-      height = 32,
-      x = 208,
-      y = 32,
-    }
+      size = {16, 32},
+      position = {208, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 16,
-      height = 32,
-      x = 208,
-      y = 64,
-    }
+      size = {16, 32},
+      position = {208, 64}
   },
   left_click_sound =
   {
@@ -542,44 +380,26 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_up"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 0,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {0, 96}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 0,
-      y = 112,
-    }
+      size = {32, 16},
+      position = {0, 112}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 16,
-      x = 0,
-      y = 128,
-    }
+      size = {32, 16},
+      position = {0, 128}
   },
   left_click_sound =
   {
@@ -597,44 +417,26 @@ data.raw["gui-style"].default["teleportation_button_style_arrow_down"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 32,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {32, 96}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 32,
-      y = 112,
-    }
+      size = {32, 16},
+      position = {32, 112}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 16,
-      x = 32,
-      y = 128,
-    }
+      size = {32, 16},
+      position = {32, 128}
   },
   left_click_sound =
   {
@@ -652,44 +454,26 @@ data.raw["gui-style"].default["teleportation_button_style_link_small"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 160,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {160, 96}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 160,
-      y = 112,
-    }
+      size = {32, 16},
+      position = {160, 112}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 16,
-      x = 160,
-      y = 128,
-    }
+      size = {32, 16},
+      position = {160, 128}
   },
   left_click_sound =
   {
@@ -707,44 +491,26 @@ data.raw["gui-style"].default["teleportation_button_style_cancel_link"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 224,
-      y = 0,
-    }
+      size = {32, 32},
+      position = {224, 0}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 32,
-      x = 224,
-      y = 32,
-    }
+      size = {32, 32},
+      position = {224, 32}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 32,
-      x = 224,
-      y = 64,
-    }
+      size = {32, 32},
+      position = {224, 64}
   },
   left_click_sound =
   {
@@ -762,44 +528,26 @@ data.raw["gui-style"].default["teleportation_sprite_style_done_small"] = {
   right_padding = 0,
   bottom_padding = 0,
   left_padding = 0,
-  font = "default-button",
+  font = "default",
   default_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 192,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {192, 96}
   },
   hovered_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
       priority = "extra-high-no-scale",
-      width = 32,
-      height = 16,
-      x = 192,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {192, 96}
   },
   clicked_graphical_set =
   {
-    type = "monolith",
-    monolith_image =
-    {
       filename = "__Teleportation__/graphics/buttons.png",
-      width = 32,
-      height = 16,
-      x = 192,
-      y = 96,
-    }
+      size = {32, 16},
+      position = {192, 96},
   },
   left_click_sound =
   {
@@ -809,9 +557,10 @@ data.raw["gui-style"].default["teleportation_sprite_style_done_small"] = {
 }
 
 data.raw["gui-style"].default["teleportation_textbox"] = {
-  type = "textfield_style",
+  type = "textbox_style",
   --parent = "textfield_style",
     minimal_width = 300,
     maximal_width = 300,
 }
+
 
