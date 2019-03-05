@@ -4,8 +4,8 @@
   "title": "Teleportation",
   "author": "Apriori",
   "description": "Devices for the teleportation. Techs for mid- and late-game. You can teleport either to the special beacons or as far as you see (also usable in zoom-ro-world mapview). You can also use Telelogistics part after both enabling it through the in-game mod settings menu and researching the technology. Just place a Teleprovider, press R on it and select a destination Beacon. Need feedback about telelogistics energy cost.",
-  "factorio_version": "0.16",
-  "dependencies": ["base >= 0.16.5"],
+  "factorio_version": "0.17",
+  "dependencies": ["base >= 0.17"],
   "contact": "https://forums.factorio.com/memberlist.php?mode=viewprofile&u=13866",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=93&t=31741"
 }

@@ -612,7 +612,6 @@ function Teleportation_ShowMainWindow(player)
     if not gui.teleportation_main_window then
       local window = gui.add({type="flow", name="teleportation_main_window", direction="vertical"})
       local grid = window.add({type="table", name="teleportation_main_window_grid", column_count=2})
-      grid.style.cell_spacing = 0
       grid.style.horizontal_spacing = 0
       grid.style.vertical_spacing = 0
       local window_menu_paging = grid.add({type="frame", name="teleportation_window_menu_paging", direction="horizontal", style="teleportation_thin_frame"})
