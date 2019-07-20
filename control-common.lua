@@ -36,6 +36,12 @@ function Common_GetDistanceBetween(position1, position2)
   return math.sqrt(math.pow(position2.x - position1.x, 2) + math.pow(position2.y - position1.y, 2))
 end
 
+function Common_GetDistanceBetweenSq(position1, position2) -- get Squared Distance. optimized for distance comparison
+	local a = position2.x - position1.x
+	local b = position2.y - position1.y
+	return (a*a) + (b*b)
+end
+
 --Looks for beacon with specified key and returns the beacon and it's index in global list
 function Common_GetBeaconByKey(beacon_key)
   if global.Teleportation ~= nil and global.Teleportation.beacons ~= nil then
