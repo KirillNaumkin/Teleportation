@@ -194,14 +194,14 @@ function Teleportation_GetBeaconsSorted(list, force_name, sort_order, player)
       end
     end
     table.sort(sorted_beacons_on_nauvis, function(a,b)
-      local dist_a = Common_GetDistanceBetween(a.entity.position, {x = 0, y = 0})
-      local dist_b = Common_GetDistanceBetween(b.entity.position, {x = 0, y = 0})
+      local dist_a = Common_GetDistanceBetweenSq(a.entity.position, {x = 0, y = 0})
+      local dist_b = Common_GetDistanceBetweenSq(b.entity.position, {x = 0, y = 0})
       return dist_a < dist_b
     end)
     for surface_name, beacons_on_surface in pairs(sorted_beacons_not_on_nauvis_by_surfaces) do
       table.sort(beacons_on_surface, function(a,b)
-        local dist_a = Common_GetDistanceBetween(a.entity.position, {x = 0, y = 0})
-        local dist_b = Common_GetDistanceBetween(b.entity.position, {x = 0, y = 0})
+        local dist_a = Common_GetDistanceBetweenSq(a.entity.position, {x = 0, y = 0})
+        local dist_b = Common_GetDistanceBetweenSq(b.entity.position, {x = 0, y = 0})
         return dist_a < dist_b
       end)
       for n, beacon in pairs(beacons_on_surface) do
@@ -224,14 +224,14 @@ function Teleportation_GetBeaconsSorted(list, force_name, sort_order, player)
       end
     end
     table.sort(sorted_beacons_on_current_surface, function(a,b)
-      local dist_a = Common_GetDistanceBetween(a.entity.position, player.position)
-      local dist_b = Common_GetDistanceBetween(b.entity.position, player.position)
+      local dist_a = Common_GetDistanceBetweenSq(a.entity.position, player.position)
+      local dist_b = Common_GetDistanceBetweenSq(b.entity.position, player.position)
       return dist_a < dist_b
     end)
     for surface_name, beacons_on_surface in pairs(sorted_beacons_not_on_current_surface_by_surfaces) do
       table.sort(beacons_on_surface, function(a,b)
-        local dist_a = Common_GetDistanceBetween(a.entity.position, player.position)
-        local dist_b = Common_GetDistanceBetween(b.entity.position, player.position)
+        local dist_a = Common_GetDistanceBetweenSq(a.entity.position, player.position)
+        local dist_b = Common_GetDistanceBetweenSq(b.entity.position, player.position)
         return dist_a < dist_b
       end)
       for n, beacon in pairs(beacons_on_surface) do
